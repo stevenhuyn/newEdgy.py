@@ -21,7 +21,7 @@ def stepFig(G):
     # Whenever you want to redraw the graph
     yield True
 
-    # Throw False to stop redrawing graph
+    # Throw False to stop drawing graph
     yield False
 
 def onPress(event):
@@ -32,23 +32,21 @@ def onPress(event):
     if event.key == 'ctrl+d':
         exit()
     elif event.key == 'ctrl+c':
-        # kind of a hacky away to pause the generator
+        # Hacky way to permanently stop the animation
         global step
         step = False
         
 if __name__ == '__main__':
-    # Binds - OPTIONAL
+    # OPTIONAL
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
     
     G = generate()
 
-    # There are other layouts, look them up in nx documentation
     position = nx.spring_layout(G)  
     for keepGoing in stepFig(G):
-        # step is the value of the yield statement
         show(G, setPos=position)
         pylab.pause(0.001)
         if keepGoing != False:
-            # upon final iteration, yield False so step == false
+            # upon final iteration, yield False so keepGoing == false
             # and therefore not clear the graph on final iteration
             pylab.cla()
