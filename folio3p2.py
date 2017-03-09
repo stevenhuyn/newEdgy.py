@@ -18,41 +18,49 @@ def generate():
 
     return G
 
+def ConnectAndColour(G, u, v, col):
+    """ colours the edge u to v and colours node v to col
+    Little bit of modularisation ;)
+    """
+    G.add_edge(u, v)
+    G.edge[u][v]['color'] = 'red'
+    G.edge[u][v]['width'] = 2
+    G.node[v]['color'] = col
+
 def sim1(G, u, v):
     """ Question 1
-    u, v are staff nodes that are not connected by the same phone.
+    u, v are staff nodes
     """
     nx.set_edge_attributes(G, 'color', 'grey')
     nx.set_edge_attributes(G, 'width', 0.5)
     yield True
+
     G.node[u]['color'] = 'green'
     yield True
 
     firstPhone = G.neighbors(u)[0]
-    G.node[firstPhone]['color'] = 'yellow'
-    G.edge[u][firstPhone]['color'] = 'red'
-    G.edge[u][firstPhone]['width'] = 2
-    yield True
+    # Checks if the staff nodes are connected by the same phone
+    if G.neighbors(v)[0] == firstPhone:
+        # That means they can just talk to eachother without the PBX system
+        ConnectAndColour(G, u, v, 'blue')
+    else:
+        # Otherwise, run as normal
+        ConnectAndColour(G, u, firstPhone, 'yellow')
+        yield True
 
-    G.node[0]['color'] = 'yellow'
-    G.edge[0][firstPhone]['color'] = 'red'
-    G.edge[0][firstPhone]['width'] = 2
-    yield True
+        ConnectAndColour(G, firstPhone, 0, 'yellow')
+        yield True
 
-    # Checking phone neighbours of PBX to see if the phone contains v
-    for phone in G.neighbors(0):
-        if v in G.neighbors(phone):
-            G.node[phone]['color'] = 'yellow'
-            G.edge[0][phone]['color'] = 'red'
-            G.edge[0][phone]['width'] = 2
-            yield True
-            
-            G.node[v]['color'] = 'blue'
-            G.edge[phone][v]['color'] = 'red'
-            G.edge[phone][v]['width'] = 2
-            yield True
-            
-            break
+        # Checking phone neighbours of PBX to see if the phone contains v
+        for phone in G.neighbors(0):
+            if v in G.neighbors(phone):
+                ConnectAndColour(G, 0, phone, 'yellow')
+                yield True
+
+                ConnectAndColour(G, phone, v, 'blue')
+                yield True
+                
+                break
 
     yield False
 
@@ -73,14 +81,10 @@ def sim2(G, v):
     # Checking phone neighbours of PBX to see if the phone contains v
     for phone in G.neighbors(0):
         if v in G.neighbors(phone):
-            G.node[phone]['color'] = 'yellow'
-            G.edge[0][phone]['color'] = 'red'
-            G.edge[0][phone]['width'] = 2
+            ConnectAndColour(G, 0, phone, 'yellow')
             yield True
-            
-            G.node[v]['color'] = 'blue'
-            G.edge[phone][v]['color'] = 'red'
-            G.edge[phone][v]['width'] = 2
+
+            ConnectAndColour(G, phone, v, 'blue')
             yield True
             
             break
@@ -120,6 +124,8 @@ def main():
         pylab.pause(0.0001)
         if keepGoing != False:
             pylab.cla()
+        else:
+            break
         
 if __name__ == '__main__':
     main()

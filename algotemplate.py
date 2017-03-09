@@ -50,3 +50,5 @@ if __name__ == '__main__':
             # upon final iteration, yield False so keepGoing == false
             # and therefore not clear the graph on final iteration
             pylab.cla()
+        else:
+            break
