@@ -19,9 +19,7 @@ def generate():
     return G
 
 def ConnectAndColour(G, u, v, col):
-    """ colours the edge u to v and colours node v to col
-    Little bit of modularisation ;)
-    """
+    """ colours the edge u to v and colours node v to col """
     G.add_edge(u, v)
     G.edge[u][v]['color'] = 'red'
     G.edge[u][v]['width'] = 2
@@ -86,7 +84,7 @@ def sim2(G, v):
 
             ConnectAndColour(G, phone, v, 'blue')
             yield True
-            
+    
             break
 
     yield False
@@ -99,6 +97,7 @@ def onPress(event):
         global step
         step = False
     elif event.key == 'ctrl+z':
+        # Restarts main loop
         pylab.cla()
         main()
 
@@ -109,11 +108,10 @@ def main():
 
     # Randomly selects 2 staff nodes
     u, v = tuple(random.sample(list(range(10, 31)), 2))
+    
+    genA = sim1(G, u, v)
+    genB = sim2(G, v)
 
-    # Swap out in the for loop to see either simulation
-    genA, genB = sim1(G, u, v), sim2(G, v)
-
-    # Adding a nice title to the graph
     strA = 'Connecting ' + str(u) + ' to ' + str(v)
     strB = 'External call to ' + str(v)
 
