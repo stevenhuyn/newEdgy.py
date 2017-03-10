@@ -36,9 +36,10 @@ def sim1(G, u, v):
     G.node[u]['color'] = 'green'
     yield True
 
-    firstPhone = G.neighbors(u)[0]
+    firstPhone = next(iter(G[u].keys()))
+##    firstPhone = G.neighbors(u)[0] # Slower way?
     # Checks if the staff nodes are connected by the same phone
-    if G.neighbors(v)[0] == firstPhone:
+    if v in G[firstPhone]:
         # That means they can just talk to eachother without the PBX system
         ConnectAndColour(G, u, v, 'blue')
     else:
@@ -50,8 +51,8 @@ def sim1(G, u, v):
         yield True
 
         # Checking phone neighbours of PBX to see if the phone contains v
-        for phone in G.neighbors(0):
-            if v in G.neighbors(phone):
+        for phone in G[0]:
+            if v in G[phone]:
                 ConnectAndColour(G, 0, phone, 'yellow')
                 yield True
 
@@ -77,14 +78,14 @@ def sim2(G, v):
     yield True
 
     # Checking phone neighbours of PBX to see if the phone contains v
-    for phone in G.neighbors(0):
-        if v in G.neighbors(phone):
+    for phone in G[0]:
+        if v in G[phone]:
             ConnectAndColour(G, 0, phone, 'yellow')
             yield True
 
             ConnectAndColour(G, phone, v, 'blue')
             yield True
-    
+            
             break
 
     yield False
