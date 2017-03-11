@@ -8,7 +8,7 @@ http://stackoverflow.com/questions/6686550/how-to-animate-a-time-ordered-sequenc
 http://stackoverflow.com/questions/12822762/pylab-ion-in-python-2-matplotlib-1-1-1-and-updating-of-the-plot-while-the-pro
 """
 
-from edgy import *
+from newEdgy import *
 
 def generate():
     G = nx.Graph()

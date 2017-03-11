@@ -3,9 +3,9 @@ Visualising the MHS PBX system
 
 Steven Nguyen
 
-ctrl + d to prompt to quit the animation if focus on the matplotlib window
+ctrl + d to prompt to quit the animation if focus is on the matplotlib window
 
-Requires modified edgy.py
+Requires modified edgy.py named newEdgy.py
 """
 from newEdgy import *
 import random
@@ -32,9 +32,7 @@ def ConnectAndColour(G, u, v, col):
     G.node[v]['color'] = col
 
 def sim1(G, u, v):
-    """ Question 1
-    u, v are staff nodes
-    """
+    """ Simulating a call between to staff members u and v """
     nx.set_edge_attributes(G, 'color', 'grey')
     nx.set_edge_attributes(G, 'width', 0.5)
     yield True
@@ -71,12 +69,7 @@ def sim1(G, u, v):
     yield False
 
 def sim2(G, v):
-    """ Question 2
-    v is the node that will be connected to
-
-    A copy and paste of  firstsimulation but removes the initial part of connecting
-    to the PBX from u
-    """
+    """ Simluating an external call through the PBX system to v """
     nx.set_edge_attributes(G, 'color', 'grey')
     nx.set_edge_attributes(G, 'width', 0.5)
     yield True
@@ -98,21 +91,18 @@ def sim2(G, v):
     yield False
 
 def onPress(event):
-    # Just for ease of use
     if event.key == 'ctrl+d':
         exit()
+        
         
 if __name__ == '__main__':
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
     
     G = generate()
 
-    # Randomly selects 2 staff nodes
     u, v = tuple(random.sample(list(range(10, 31)), 2))
-    
     genA = sim1(G, u, v)
     genB = sim2(G, v)
-
     strA = 'Connecting ' + str(u) + ' to ' + str(v)
     strB = 'External call to ' + str(v)
 
