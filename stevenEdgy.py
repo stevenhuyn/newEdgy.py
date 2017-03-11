@@ -60,6 +60,5 @@ def show(G, node_attribute = "id", edge_attribute = "label", node_size=1250,
     nodes = nx.draw_networkx_nodes(G, layout, node_color = node_colors, node_size=node_size)
     edges = nx.draw_networkx_edges(G, layout, edge_color=edge_colors, width=edge_width,
                                    node_edge='black')
-    
     # If G has no nodes, then this will raise an error :(
     nodes.set_edgecolor('black')

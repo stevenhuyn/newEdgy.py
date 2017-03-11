@@ -51,4 +51,6 @@ if __name__ == '__main__':
             # and therefore not clear the graph on final iteration
             pylab.cla()
         else:
+            pylab.ioff()
+            pylab.show()
             break
