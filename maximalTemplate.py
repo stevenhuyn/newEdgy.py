@@ -1,5 +1,5 @@
 """
-Quick template using modified edgy.py for redrawing the
+Quick template using modified edgy.py (newEdgy.py) for redrawing the
 graph with a generator function.
 
 References
@@ -21,23 +21,23 @@ def stepFig(G):
     # Whenever you want to redraw the graph
     yield True
 
-    # Throw False to stop drawing graph
+    # Throw False to stop and not clear the final draw
     yield False
 
 def onPress(event):
-    # OPTIONAL
-    
     # Adds binds to the matplotlib window so you
-    # can close it when focused properly
+    # can close it when window focused
     if event.key == 'ctrl+d':
         exit()
     elif event.key == 'ctrl+c':
-        # Hacky way to permanently stop the animation
-        global step
-        step = False
-        
-if __name__ == '__main__':
-    # OPTIONAL
+        # Hacky way to stop the animation
+        global keepGoing
+        keepGoing = False
+    elif event.key == 'ctrl+z':
+        # Restart the animation
+        main()
+
+def main():
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
     
     G = generate()
@@ -47,10 +47,15 @@ if __name__ == '__main__':
         show(G, setPos=position)
         pylab.pause(0.001)
         if keepGoing != False:
-            # upon final iteration, yield False so keepGoing == false
-            # and therefore not clear the graph on final iteration
+            # Clears the graph
             pylab.cla()
         else:
+            # Does not clear the graph
+            # Remvoe below two lines if you are making an infinite loop animation
+            # because it turns of interactive graphing
             pylab.ioff()
             pylab.show()
             break
+
+if __name__ == '__main__':
+    main()

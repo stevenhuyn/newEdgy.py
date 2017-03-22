@@ -7,8 +7,7 @@ ctrl + d to prompt to quit the animation if focus is on the matplotlib window
 
 Requires modified edgy.py named newEdgy.py
 
-
-Getting this message
+Getting the message
 warnings.warn(str, mplDeprecation)
 is normal and shouldn't affect anything
 """
@@ -16,7 +15,10 @@ from newEdgy import *
 import random
 
 def generate():
-    nodeList = list(range(31))
+    nodeListPBX = [0]
+    nodeListPhone = list(range(1, 10))
+    nodeListStaff = list(range(10, 31))
+    
     edgeListConnects = ((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8),
                         (0, 9))
     edgeListNear = ((1, 10), (2, 11), (2, 12), (2, 13), (2, 14), (3, 15), (3, 16),
@@ -24,14 +26,14 @@ def generate():
                     (7, 24), (7, 25), (7, 26), (8, 27), (8, 28), (9, 29), (9, 30))
     
     G = nx.Graph()
-    G.add_nodes_from(nodeList)
+    G.add_nodes_from(nodeListPBX + nodeListPhone + nodeListStaff)
     G.add_edges_from(edgeListConnects + edgeListNear)
 
     return G
 
 def ConnectAndColour(G, u, v, col):
-    """ colours the edge u to v and colours node v to col """
-    G.add_edge(u, v)
+    """ colours the edge u to v and node v to col """
+    G.add_edge(u, v)    # In case not connected
     G.edge[u][v]['color'] = 'red'
     G.edge[u][v]['width'] = 2
     G.node[v]['color'] = col
@@ -45,6 +47,8 @@ def sim1(G, u, v):
     G.node[u]['color'] = 'green'
     yield True
 
+    # As each staff only has 1 neighbour,
+    # Below is the fastest way to get a arbitary key from a dict
     firstPhone = next(iter(G[u].keys()))
     
     # Checks if the staff nodes are connected by the same phone
@@ -70,7 +74,7 @@ def sim1(G, u, v):
                 yield True
                 
                 break
-
+    print('ended')
     yield False
 
 def sim2(G, v):
@@ -98,13 +102,18 @@ def sim2(G, v):
 def onPress(event):
     if event.key == 'ctrl+d':
         exit()
-        
-        
-if __name__ == '__main__':
-    pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
+    elif event.key == 'ctrl+z':
+        # Restart animation
+        # A little bit buggy
+        pylab.cla()
+        main()
+
+def main():
+    print('test')
+    pylab.gcf().canvas.mpl_connect( 'key_press_event', onPress)
     
     G = generate()
-
+    
     u, v = tuple(random.sample(list(range(10, 31)), 2))
     genA = sim1(G, u, v)
     genB = sim2(G, v)
@@ -122,3 +131,7 @@ if __name__ == '__main__':
             pylab.ioff()
             pylab.show()
             break
+        
+if __name__ == '__main__':
+    main()
+

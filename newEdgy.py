@@ -14,8 +14,8 @@ try:
 except ImportError:
     from queue import PriorityQueue
 
-# Turns on interactive mode
-# http://stackoverflow.com/questions/12358312/keep-plotting-window-open-in-matplotlib ty
+# Turns on interactive mode for animation???
+# http://stackoverflow.com/questions/12358312/keep-plotting-window-open-in-matplotlib
 pylab.ion()
 
 def show(G, node_attribute = "id", edge_attribute = "label", node_size=1250,
@@ -61,8 +61,40 @@ def show(G, node_attribute = "id", edge_attribute = "label", node_size=1250,
     pylab.axis('off')
     
     nodes = nx.draw_networkx_nodes(G, layout, node_color = node_colors, node_size=node_size)
-    edges = nx.draw_networkx_edges(G, layout, edge_color=edge_colors, width=edge_width,
-                                   node_edge='black')
+    edges = nx.draw_networkx_edges(G, layout, edge_color=edge_colors, width=edge_width)
     
     # If G has no nodes, then this will raise an error :(
     nodes.set_edgecolor('black')
+
+def onPress(event):
+    # OPTIONAL
+    
+    # Adds binds to the matplotlib window so you
+    # can close it when focused properly
+    if event.key == 'ctrl+d':
+        exit()
+    elif event.key == 'ctrl+c':
+        # kind of a hacky away to pause the generator
+        global step
+        step = False
+
+def animate(G, gen):
+    # Binding
+    pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
+        
+    # There are other layouts, look them up in nx documentation
+    position = nx.spring_layout(G)  
+    for keepGoing in gen(G):
+        # step is the value of the yield statement
+        show(G, setPos=position)
+        pylab.pause(0.001)
+        if keepGoing != False:
+            # upon final iteration, yield False so step == false
+            # and therefore not clear the graph on final iteration
+            pylab.cla()
+        else:
+            pylab.ioff()
+            pylab.show()
+            break
+            
+    
