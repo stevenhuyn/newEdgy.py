@@ -99,15 +99,6 @@ def sim2(G, v):
 
     yield False
 
-def onPress(event):
-    if event.key == 'ctrl+d':
-        exit()
-    elif event.key == 'ctrl+z':
-        # Restart animation
-        # A little bit buggy
-        pylab.cla()
-        main()
-
 def main():
     print('test')
     pylab.gcf().canvas.mpl_connect( 'key_press_event', onPress)
