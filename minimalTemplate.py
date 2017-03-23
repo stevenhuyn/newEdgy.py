@@ -14,7 +14,6 @@ def generateGraph():
 
     return G
 
-
 def algorithm(G):
     # Paramater must hold G
 
