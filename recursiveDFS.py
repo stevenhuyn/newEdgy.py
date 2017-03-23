@@ -50,7 +50,7 @@ def showPath():
         G.edge[u][v]['color'] = 'red'
         G.edge[u][v]['width'] = 2
 
-    show(G, setPos=position, node_attribute='count')
+    show(G, setPos=position)
     pylab.pause(0.001)
     pylab.cla()
 
