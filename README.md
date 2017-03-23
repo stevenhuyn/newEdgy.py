@@ -1,5 +1,7 @@
 # newEdgy.py
-Updated edgy.py for the VCE Algorithmic course, added some examples of animation. For networkx and matplotlib 2.0 and python 3.
+Helper function to quickly draw small networkx graphs, with some extended functions to aid animation.  
+Based off of the edgy.py file from the VCE Algorithmic course 2017.  
+For networkx, matplotlib 2.0 and python 3.5+.
 
 **Usage**  
 Only file necessary is newEdgy.py, look at minimalTemplate.py for the quickest and dirtiest way to animate/convert existing algorithms.
