@@ -1,5 +1,7 @@
 """
 Visualising the MHS PBX system
+
+Modify the main function to choose which simulation to run
 """
 
 from newEdgy import *
