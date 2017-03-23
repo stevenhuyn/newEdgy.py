@@ -35,5 +35,4 @@ if __name__ == '__main__':
     G = generateGraph()
     
     animate(G, algorithm)
-    animate(G, algorithm)
     
