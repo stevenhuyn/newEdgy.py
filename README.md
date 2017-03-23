@@ -1,8 +1,10 @@
 # newEdgy.py
 Updated edgy.py for the VCE Algorithmic course, added some examples of animation. For networkx and matplotlib 2.0 and python 3.
 
-Links to references
+**Usage**  
+Only file necessary is newEdgy.py, look at minimalTemplate.py for the quickest and dirtiest way to animate/convert existing algorithms.
 
+**Links to references**  
 Setting outline of nodes in networkx  
 https://stackoverflow.com/questions/22716161/how-can-one-modify-the-outline-color-of-a-node-in-networkx
 
