@@ -1,3 +1,7 @@
+"""
+An example of animating a recursive algorithm.
+"""
+
 from newEdgy import *
 import random
 
