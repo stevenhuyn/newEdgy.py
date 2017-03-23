@@ -1,16 +1,7 @@
 """
 Visualising the MHS PBX system
-
-Steven Nguyen
-
-ctrl + d to prompt to quit the animation if focus is on the matplotlib window
-
-Requires modified edgy.py named newEdgy.py
-
-Getting the message
-warnings.warn(str, mplDeprecation)
-is normal and shouldn't affect anything
 """
+
 from newEdgy import *
 import random
 
