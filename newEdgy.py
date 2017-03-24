@@ -18,9 +18,16 @@ except ImportError:
 # http://stackoverflow.com/questions/12358312/keep-plotting-window-open-in-matplotlib
 pylab.ion()
 
-def show(G, node_attribute = "id", edge_attribute = "label", node_size=1250,
-         setPos=None, labelPos=0.7):
+def show(G,
+         node_attribute="id",
+         edge_attribute="weight",
+         node_size=1250,
+         setPos=None,
+         labelPos=0.7):
     """
+    For basic needs
+    >> Show(G)
+    ---------------
     node_attribute:     Which dictionary the labels for the nodes are using for
                         the label
     edge_attribute:     Same as above but for edges
