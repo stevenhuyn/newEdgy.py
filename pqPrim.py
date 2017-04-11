@@ -17,10 +17,9 @@ def generateGraph():
 
     return G
 
+
 def prim(G):
-    """
-    Implementation of Prim's algorithm with a priority queue
-    """
+    """ Implementation of Prim's algorithm with a priority queue """
 
     toSearch = PriorityQueue()
     visited = list()
@@ -43,7 +42,7 @@ def prim(G):
         for neigh in G[w]:
             if neigh not in visited:
                 toSearch.put_nowait((G.edge[w][neigh]['weight'], (w, neigh)))
-            
+   
         yield True
 
     for u, v in G.edges():
@@ -52,9 +51,8 @@ def prim(G):
             
     yield False
 
+
 if __name__ == '__main__':
     G = generateGraph()
     
     animate(G, prim)
-    
-    

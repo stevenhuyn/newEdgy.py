@@ -23,7 +23,9 @@ def show(G,
          edge_attribute="weight",
          node_size=1250,
          setPos=None,
-         labelPos=0.7):
+         labelPos=0.7,
+         nodeFontSize=12,
+         edgeFontSize=12):
     """
     For basic needs
     >> Show(G)
@@ -59,23 +61,21 @@ def show(G,
     if node_attribute != None:
         node_labels = dict((v, v if node_attribute == "id" else G.node[v].get(node_attribute, v))
             for v in G.nodes())
-        nx.draw_networkx_labels(G, layout, node_labels)
+        nx.draw_networkx_labels(G, layout, node_labels, font_size=nodeFontSize)
 
     if edge_attribute != None:
         edge_labels = dict((e, G.edge[e[0]][e[1]].get(edge_attribute, "")) for e in G.edges())
-        nx.draw_networkx_edge_labels(G, layout, edge_labels, label_pos=labelPos)
+        nx.draw_networkx_edge_labels(G, layout, edge_labels, label_pos=labelPos, font_size=edgeFontSize)
 
     pylab.axis('off')
     
-    nodes = nx.draw_networkx_nodes(G, layout, node_color = node_colors, node_size=node_size)
+    nodes = nx.draw_networkx_nodes(G, layout, node_color=node_colors, node_size=node_size)
     edges = nx.draw_networkx_edges(G, layout, edge_color=edge_colors, width=edge_width)
     
     # If G has no nodes, then this will raise an error :(
     nodes.set_edgecolor('black')
 
 def onPress(event):
-    # OPTIONAL
-    
     # Adds binds to the matplotlib window so you
     # can close it when focused properly
     if event.key == 'ctrl+d':
@@ -85,13 +85,13 @@ def onPress(event):
         global step
         step = False
 
-def animate(G, gen):
+def animate(G, gen, **kwargs):
     # Binding
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
         
     # There are other layouts, look them up in nx documentation
     position = nx.spring_layout(G)  
-    for keepGoing in gen(G):
+    for keepGoing in gen(G, **kwargs):
         # step is the value of the yield statement
         show(G, setPos=position)
         pylab.pause(0.001)

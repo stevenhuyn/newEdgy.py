@@ -1,0 +1,5 @@
+The current animate function never ends, so you can't call it multiple times without having to manually close the matplotlib window
+This is due to the pylab.block thing, so that the graph stays up when ran through cli.
+This is solved if ran through the shell, but how do you run through shell on things that aren't IDLE?
+
+animate(G, algo, **kwargs) vs animate(algo(G, **kwargs))

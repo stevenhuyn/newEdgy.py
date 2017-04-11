@@ -25,6 +25,8 @@ def stepFig(G):
     yield False
 
 def onPress(event):
+    # Shouldn't need to touch this at all
+    
     # Adds binds to the matplotlib window so you
     # can close it when window focused
     if event.key == 'ctrl+d':
@@ -38,6 +40,7 @@ def onPress(event):
         main()
 
 def main():
+    # Shouldn't need to touch this at all
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
     
     G = generate()

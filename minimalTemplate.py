@@ -14,12 +14,11 @@ def generateGraph():
 
     return G
 
-def algorithm(G):
+def algorithm(G, u):
     # Paramater must hold G
 
+    # Yield true every time G is to be drawn
     yield True
-    
-    u = random.choice(G.nodes())
 
     G.node[u]['color'] = 'green'
     yield True
@@ -27,12 +26,22 @@ def algorithm(G):
     G.node[u]['color'] = 'red'
     yield True
 
+    dfs = nx.dfs_edges(G, source=u)
+    for v, w in dfs:
+        nx.dfs_edges
+        G.add_edge(v, w, width=3, color='red')
+        yield True
+
     # The last yield statement must be False
     yield False
 
-if __name__ == '__main__':
+def main():
     G = generateGraph()
-    
-    animate(G, algorithm)
+    initialNode = random.choice(G.nodes())
+    animate(G, algorithm, u=initialNode)
+
+if __name__ == '__main__':
+    main()
+
     
     
