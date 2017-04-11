@@ -4,7 +4,7 @@ Based off of the edgy.py file from the VCE Algorithmic course 2017.
 For networkx, matplotlib 2.0 and python 3.5+.
 
 **Usage**  
-Only file necessary is newEdgy.py, look at minimalTemplate.py for the quickest and dirtiest way to animate/convert existing algorithms.
+Only file necessary is newEdgy.py
 
 ```Python
 >> from newEdgy import *
@@ -14,10 +14,10 @@ Only file necessary is newEdgy.py, look at minimalTemplate.py for the quickest a
 >> show(G)
 ```
 
-**Animations**
-Run your scripts through python's interactive mode to be able to modify plots on the fly, and is required for the animate function.
+**Animations**  
+Run your scripts through python's interactive mode to be able to modify plots on the fly, and is required for the animate function. look at minimalTemplate.py for the quickest and dirtiest way to animate/convert existing algorithms.
 
-cli example
+cli example  
 python -i script.py
 
 **Links to references**  
