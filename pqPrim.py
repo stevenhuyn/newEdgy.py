@@ -3,12 +3,12 @@ from newEdgy import *
 import random
 from queue import PriorityQueue
 
-def generateGraph():
+def generateGraph(n):
     """ Returns a graph object """
     G = nx.Graph()
 
     # Fill in graph nodes, edges and attributes
-    G = nx.grid_graph([5, 5])
+    G = nx.grid_graph([n, n])
 
     nx.set_edge_attributes(G, 'color', 'black')
     nx.set_edge_attributes(G, 'width', 0.5)
@@ -53,6 +53,6 @@ def prim(G):
 
 
 if __name__ == '__main__':
-    G = generateGraph()
+    G = generateGraph(3)
     
     animate(G, prim)

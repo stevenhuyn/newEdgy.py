@@ -29,6 +29,8 @@ def show(G,
     """
     For basic needs
     >> Show(G)
+
+    Parameters
     ---------------
     node_attribute:     Which dictionary the labels for the nodes are using for
                         the label
@@ -38,6 +40,8 @@ def show(G,
                         the layout methods example nx.spring_layout
     labelPos:           The offset of the edge labels to avoid overlap defaults
                         0.7 for non symmetry
+    nodeFontSize:       ...
+    edgeFontSize:       Modify the font size of edges
     """
 
     if setPos == None:
@@ -100,7 +104,6 @@ def animate(G, gen, **kwargs):
             # and therefore not clear the graph on final iteration
             pylab.cla()
         else:
-            pylab.ioff()
             pylab.show()
             break
             
