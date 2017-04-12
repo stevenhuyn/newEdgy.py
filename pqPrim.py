@@ -36,7 +36,7 @@ def prim(G):
         if w in visited:
             continue
         G.edge[v][w]['color'] = 'red'
-        G.edge[v][w]['width'] = 3
+        G.edge[v][w]['width'] = 2
         G.node[w]['color'] = 'green'
         visited.append(w)
         for neigh in G[w]:
@@ -51,8 +51,18 @@ def prim(G):
             
     yield False
 
-
+def pruneTree(G):
+    for u, v in G.edges():
+        if G.edge[u][v]['color'] != 'red':
+            G.remove_edge(u, v)
+            
 if __name__ == '__main__':
     G = generateGraph(3)
     
     animate(G, prim)
+    pruneTree(G)
+    pylab.cla()
+    
+    u = random.choice(G.nodes())
+    show(G, setPos=hierarchy_pos(G, u), labelPos=0.5, edgeFontSize=12)
+    

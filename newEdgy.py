@@ -104,12 +104,12 @@ def animate(G, gen, **kwargs):
             # and therefore not clear the graph on final iteration
             pylab.cla()
         else:
-            pylab.ioff()
+##            pylab.ioff()
             pylab.show()
             break
 
 def hierarchy_pos(G, root, levels=None, width=1., height=1.):
-    # Legitmate goldmine, taken from
+    # Legitmate goldmine
     # http://stackoverflow.com/questions/29586520/can-one-get-hierarchical-graphs-from-networkx-with-python-3
     '''If there is a cycle that is reachable from root, then this will see infinite recursion.
        G: the graph
