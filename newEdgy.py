@@ -9,6 +9,10 @@ import networkx as nx
 import pylab
 from collections import deque
 
+# as nx.write_dot doesn't work, workaround
+# http://stackoverflow.com/questions/14943439/how-to-draw-multigraph-in-networkx-using-matplotlib-or-graphviz
+from networkx.drawing.nx_pydot import write_dot
+
 try:
     from Queue import PriorityQueue
 except ImportError:
