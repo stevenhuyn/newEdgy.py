@@ -40,7 +40,6 @@ def onPress(event):
         main()
 
 def main():
-    # Shouldn't need to touch this at all
     pylab.gcf().canvas.mpl_connect('key_press_event', onPress)
     
     G = generate()
